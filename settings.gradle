@@ -1,1 +1,9 @@
 rootProject.name = 'kitchenpos'
+
+include 'common'
+include 'menu'
+include 'order'
+
+project(':common').projectDir = "$rootDir/common" as File
+project(':menu').projectDir = "$rootDir/menu" as File
+project(':order').projectDir = "$rootDir/order" as File

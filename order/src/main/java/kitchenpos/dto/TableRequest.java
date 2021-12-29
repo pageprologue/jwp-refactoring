@@ -1,0 +1,40 @@
+package kitchenpos.dto;
+
+import kitchenpos.domain.OrderTable;
+import kitchenpos.domain.TableState;
+
+import javax.validation.constraints.PositiveOrZero;
+
+public class TableRequest {
+    @PositiveOrZero
+    private int numberOfGuests;
+    private boolean empty;
+
+    protected TableRequest() {
+    }
+
+    public TableRequest(int numberOfGuests, boolean empty) {
+        this.numberOfGuests = numberOfGuests;
+        this.empty = empty;
+    }
+
+    public static TableRequest empty() {
+        return new TableRequest(0, true);
+    }
+
+    public static TableRequest from(int numberOfGuests) {
+        return new TableRequest(numberOfGuests, false);
+    }
+
+    public OrderTable toEntity() {
+        return OrderTable.of(numberOfGuests, new TableState(empty));
+    }
+
+    public int getNumberOfGuests() {
+        return this.numberOfGuests;
+    }
+
+    public boolean isEmpty() {
+        return empty;
+    }
+}
